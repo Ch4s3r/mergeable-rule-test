@@ -1,0 +1,13 @@
+version: 2
+mergeable:
+  - when: pull_request.*, pull_request_review.*
+    name: 'PR has the required number of approvals'
+    validate:
+      - do: or
+        validate:
+          - do: approvals
+            min:
+              count: 1
+              message: At least one review is required.
+            limit:
+              owners: true
