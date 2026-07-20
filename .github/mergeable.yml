@@ -11,3 +11,39 @@ mergeable:
               message: At least one review is required.
             limit:
               owners: true
+
+  - when: pull_request.*
+    name: 'PR title follows conventions'
+    validate:
+      - do: title
+        must_exclude:
+          regex: '^(WIP|wip)'
+          message: 'Title must not start with WIP'
+        must_include:
+          regex: '^(feat|fix|chore|docs|test|refactor|build|ci)(\(.+\))?:'
+          message: 'Title must follow conventional commits format, e.g. "feat: add X"'
+
+  - when: pull_request.*
+    name: 'PR size is reasonable'
+    validate:
+      - do: size
+        lines:
+          total:
+            count: 500
+            message: 'PR is too large (over 500 changed lines) — please split it up'
+
+  - when: pull_request.*, check_run.*, status
+    name: 'CI'
+    validate:
+      - do: or
+        validate:
+          - do: status
+            check: ci-build
+          - do: status
+            check: ci-lint
+    pass:
+      - do: checks
+        status: success
+    fail:
+      - do: checks
+        status: failure
