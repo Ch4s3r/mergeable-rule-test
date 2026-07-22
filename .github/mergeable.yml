@@ -49,7 +49,7 @@ mergeable:
         validate:
           - do: status
             check: e2e-status-check
-            allowed_reporter: 'GitHub Actions'
+            allowed_reporter: 'GitHub Actionz'
           - do: status
             check: e2e-other-reporter-check
             allowed_reporter: 'other'
