@@ -54,4 +54,4 @@ mergeable:
     validate:
       - do: status
         check: e2e-other-reporter-check
-        allowed_reporter: 'GitHub Actions'
+        allowed_reporter: 'other'
