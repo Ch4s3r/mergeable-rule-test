@@ -45,9 +45,11 @@ mergeable:
   - when: pull_request.*, check_run.*, status
     name: 'e2e: trusted reporter enforced, other reporters ignored'
     validate:
-      - do: status
-        check: e2e-status-check
-        allowed_reporter: 'GitHub Actions'
-      - do: status
-        check: e2e-other-reporter-check
-        allowed_reporter: 'other'
+      - do: or
+        validate:
+          - do: status
+            check: e2e-status-check
+            allowed_reporter: 'GitHub Actions'
+          - do: status
+            check: e2e-other-reporter-check
+            allowed_reporter: 'other'
