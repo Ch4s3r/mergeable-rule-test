@@ -1,0 +1,10 @@
+name: e2e-status-check
+
+on:
+  pull_request:
+
+jobs:
+  e2e-status-check:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "trusted reporter check"

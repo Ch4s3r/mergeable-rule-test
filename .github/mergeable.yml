@@ -41,3 +41,17 @@ mergeable:
             check: ci-build
           - do: status
             check: ci-lint
+
+  - when: pull_request.*, check_run.*, status
+    name: 'e2e: trusted reporter check must pass'
+    validate:
+      - do: status
+        check: e2e-status-check
+        allowed_reporter: 'GitHub Actions'
+
+  - when: pull_request.*, check_run.*, status
+    name: 'e2e: spoofed reporter check must be ignored'
+    validate:
+      - do: status
+        check: e2e-spoofed-check
+        allowed_reporter: 'GitHub Actions'
