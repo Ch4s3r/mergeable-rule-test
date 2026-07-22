@@ -50,8 +50,8 @@ mergeable:
         allowed_reporter: 'GitHub Actions'
 
   - when: pull_request.*, check_run.*, status
-    name: 'e2e: spoofed reporter check must be ignored'
+    name: 'e2e: check from a different reporter must be ignored'
     validate:
       - do: status
-        check: e2e-spoofed-check
+        check: e2e-other-reporter-check
         allowed_reporter: 'GitHub Actions'
