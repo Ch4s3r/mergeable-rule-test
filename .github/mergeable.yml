@@ -41,9 +41,3 @@ mergeable:
             check: ci-build
           - do: status
             check: ci-lint
-    pass:
-      - do: checks
-        status: success
-    fail:
-      - do: checks
-        status: failure
